@@ -12,20 +12,23 @@ import { Header } from "../organisms/Header"
 export const Home: React.FC = () => {
 	const [taskValue, setTaskValue] = useState<string>("");
 	const [radioValue, setRadioValue] = useState<string>("");
-	const [dateValue, setDateValue] = useState<Date | null>(null);
+	const [dateStartValue, setDateStartValue] = useState<Date | null>(null);
+	const [dateEndValue, setDateEndValue] = useState<Date | null>(null);
 	const [remarksValue, setRemarksValue] = useState<string>("");
 
 	const onClickButton = () => {
 		db.collection('tasks').add({
 			taskValue: taskValue,
 			radioValue: radioValue,
-			dateValue: dateValue,
+			dateStartValue: dateStartValue,
+			dateEndValue: dateEndValue,
 			remarksValue: remarksValue
 		})
 		.then(() => {
 			setTaskValue("")
 			setRadioValue("")
-			setDateValue(null)
+			setDateStartValue(null)
+			setDateEndValue(null)
 			setRemarksValue("")
 		})
 	}
@@ -37,11 +40,16 @@ export const Home: React.FC = () => {
 				<SDiv>タスクを追加する</SDiv>
 				<TaskTextField taskValue={taskValue} setTaskValue={setTaskValue}/>
 				<ImportantRadio radioValue={radioValue} setRadioValue={setRadioValue}/>
-				<br />
-				<DateInputField dateValue={dateValue} setDateValue={setDateValue} />
-				<br />
+				<DateInputField dateValue={dateStartValue} setDateValue={setDateStartValue} label={"タスク開始日"} />
+				<DateInputField dateValue={dateEndValue} setDateValue={setDateEndValue} label={"タスク期日"} />
 				<RemarkTextField remarksValue={remarksValue} setRemarksValue={setRemarksValue}/>
-				<Button variant="contained" onClick={onClickButton} disabled={!taskValue || !radioValue || !dateValue}>登録</Button>
+				<Button
+					variant="contained"
+					onClick={onClickButton}
+					disabled={!taskValue || !radioValue || !dateStartValue || !dateEndValue}
+				>
+					登録
+				</Button>
 			</SMain>
 		</>
 	)

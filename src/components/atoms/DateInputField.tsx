@@ -7,16 +7,17 @@ import styled from 'styled-components';
 
 interface DateType {
 	dateValue: Date | null;
-	setDateValue: (e: Date | null) => void
+	setDateValue: (e: Date | null) => void;
+	label: string;
 }
 
 export const DateInputField = (props: DateType) => {
-	const {dateValue, setDateValue} = props;
+	const {dateValue, setDateValue, label} = props;
 	return (
 		<Sdiv>
 			<LocalizationProvider dateAdapter={AdapterDateFns}>
 				<DatePicker
-					label="タスク期日"
+					label={label}
 					value={dateValue}
 					onChange={(e: Date | null) => {
 					setDateValue(e);
