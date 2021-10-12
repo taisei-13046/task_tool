@@ -6,13 +6,13 @@ import {Task} from "../components/pages/Task"
 
 export const Router: VFC = memo(() => {
   return (
-    <Switch>
-        <Route exact path="/">
-			<Home />
-        </Route>
-		<Route path="/task">
-			<Task />
+    	<Switch>
+		<Route exact path="/">
+				<Home />
 		</Route>
+			<Route path="/task">
+				<Task />
+			</Route>
 	</Switch>
 	)
 });
