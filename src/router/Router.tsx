@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 import {Home} from "../components/pages/Home"
 import {Task} from "../components/pages/Task"
+import { Gantt } from "../components/pages/Gantt";
 
 export const Router: VFC = memo(() => {
   return (
@@ -13,6 +14,9 @@ export const Router: VFC = memo(() => {
 			<Route path="/task">
 				<Task />
 			</Route>
+		<Route path="/gantt">
+			<Gantt />
+		</Route>
 	</Switch>
 	)
 });
