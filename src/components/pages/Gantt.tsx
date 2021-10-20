@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  GanttComponent,
-  TaskFieldsModel,
-} from "@syncfusion/ej2-react-gantt";
-import Button from "@mui/material/Button";
+import { GanttComponent, TaskFieldsModel } from "@syncfusion/ej2-react-gantt";
 import "../../App.css";
 
 import { db } from "../../firebase";
@@ -15,34 +11,39 @@ const taskFields: TaskFieldsModel = {
   id: "TaskID",
   name: "TaskName",
   startDate: "StartDate",
+  endDate: "EndDate",
 };
 
 export const Gantt = () => {
-  const [ganttData, setGanttData] = useState<GanttType[]>([])
+  const [ganttData, setGanttData] = useState<GanttType[]>([]);
   let index = 1;
 
-  useEffect (() => {
+  useEffect(() => {
     const getGanttData = async () => {
-      const getTaskData: GanttType[] = []
+      const getTaskData: GanttType[] = [];
       const docRef = db.collection("tasks");
-      await docRef.get().then((querySnapshot) => {
-        querySnapshot.docs.map((doc) => {
-          const task = doc.data() as DataType;
-          if (task) {
-            getTaskData.push({
-              TaskID: index,
-              TaskName: task.taskValue,
-              StartDate: task.dateStartValue.toDate(),
-              EndDate: task.dateEndValue.toDate()
-            });
-            index++;
-          }
+      await docRef
+        .orderBy("dateStartValue")
+        .get()
+        .then((querySnapshot) => {
+          console.log(querySnapshot.docs);
+          querySnapshot.docs.map((doc) => {
+            const task = doc.data() as DataType;
+            if (task) {
+              getTaskData.push({
+                TaskID: index,
+                TaskName: task.taskValue,
+                StartDate: task.dateStartValue.toDate(),
+                EndDate: task.dateEndValue.toDate(),
+              });
+              index++;
+            }
+          });
         });
-      });
-      setGanttData(getTaskData)
+      setGanttData(getTaskData);
     };
-    getGanttData()
-  }, [])
+    getGanttData();
+  }, []);
 
   console.log(ganttData);
   return (
@@ -50,9 +51,9 @@ export const Gantt = () => {
       <Header />
       <GanttComponent
         dataSource={ganttData}
-        height="450px"
+        height="650px"
         taskFields={taskFields}
-        timelineSettings={{ timelineViewMode: "Day" }}
+        timelineSettings={{ timelineViewMode: "Week" }}
       ></GanttComponent>
     </div>
   );
