@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { TaskInfo } from './TaskInfo';
+import { TaskInfo } from '../../module/TaskInfo';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { DataType } from '../../../types/firebase/user';
 import {usetableBodyStyle } from '../../styles/tableStyle';

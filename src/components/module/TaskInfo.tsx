@@ -1,7 +1,6 @@
-import { FormControl, FormLabel, Input, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { FC, memo } from "react"
-import { DataType } from "../../../types/firebase/user"
-import { usetableBodyStyle } from "../../styles/tableStyle";
+import { usetableBodyStyle } from "../styles/tableStyle";
 
 type Props = {
 	taskValue: string | undefined
@@ -22,7 +21,11 @@ export const TaskInfo: FC<Props> = memo((props) => {
 	}/${
 		String(dateStartValue.getDate()).padStart(2, '0')
 	}`;
-	console.log(dates);
+	const enddates = `${dateEndValue.getFullYear()}/${
+		String(dateEndValue.getMonth() + 1).padStart(2, '0')
+	}/${
+		String(dateEndValue.getDate()).padStart(2, '0')
+	}`;
 	let deadDate = String(((dateEndValue - nowDate) / 86400000).toFixed());
 	return (
 		<Stack textAlign="center" spacing={2} className={classes.bodystyle}>
@@ -38,18 +41,36 @@ export const TaskInfo: FC<Props> = memo((props) => {
 			<Typography id="modal-modal-description" sx={{ mt: 2 }} className={classes.bodystyle}>
 			{radioValue}
 			</Typography>
-			<Typography id="modal-modal-title" variant="h6" component="h1" fontSize="bold">
-			開始日時
-			</Typography>
-			<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-			{dates}
-			</Typography>
-			<Typography id="modal-modal-title" variant="h6" component="h1" fontSize="bold">
-			残り日数
-			</Typography>
-			<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-			残り {deadDate} 日
-			</Typography>
+			<div style={{display: "flex",
+						justifyContent: "center",
+						textAlign: "center",
+			}}>
+				<div style={{paddingLeft: "20px",
+			}}>
+					<Typography id="modal-modal-title" variant="h6" component="h1" fontSize="bold">
+					開始日時
+					</Typography>
+					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+					{dates}
+					</Typography>
+				</div>
+				<div style={{paddingLeft: "20px"}}>
+					<Typography id="modal-modal-title" variant="h6" component="h1" fontSize="bold">
+					締切日
+					</Typography>
+					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+					{enddates}
+					</Typography>
+				</div>
+				<div style={{paddingLeft: "20px"}}>
+					<Typography id="modal-modal-title" variant="h6" component="h1" fontSize="bold">
+					残り日数
+					</Typography>
+					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+					残り {deadDate} 日
+					</Typography>
+				</div>
+			</div>
 			<Typography id="modal-modal-title" variant="h6" component="h1" fontSize="bold">
 			Memo
 			</Typography>
