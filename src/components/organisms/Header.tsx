@@ -39,6 +39,7 @@ export const Header = () => {
   const [ drawerOpen, setDrawerOpen ] = useState(false);
 	const onCLickHome = useCallback(() => history.push("/"), [history]);
 	const onCLickTask = useCallback(() => history.push("/task"), [history]);
+	const onCLickGantt = useCallback(() => history.push("/gantt"), [history]);
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   }
@@ -62,6 +63,7 @@ export const Header = () => {
         handleDrawerToggle={handleDrawerToggle}
         onCLickHome={onCLickHome}
         onCLickTask={onCLickTask}
+        onCLickGantt={onCLickGantt}
       />
     </div>
   );
