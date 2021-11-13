@@ -10,10 +10,11 @@ type Props = {
 	handleDrawerToggle: () => void,
 	onCLickHome: () => void,
 	onCLickTask: () => void,
+	onCLickGantt: () => void,
 }
 
 export const MenuDrawer: FC<Props> = memo((props) => {
-	const {drawerOpen, handleDrawerToggle, onCLickHome, onCLickTask} = props;
+	const {drawerOpen, handleDrawerToggle, onCLickHome, onCLickTask, onCLickGantt} = props;
 	return (
 		<Drawer
 			variant="temporary"
@@ -27,6 +28,12 @@ export const MenuDrawer: FC<Props> = memo((props) => {
 							<HomeIcon />
 						</ListItemIcon>
 						<ListItemText style={{paddingRight: "20px"}} primary="HOME"/>
+					</ListItem>
+					<ListItem button key={"GANTT"} onClick={onCLickGantt}>
+						<ListItemIcon>
+							<AssignmentIndIcon />
+						</ListItemIcon>
+						<ListItemText primary="GANTT"/>
 					</ListItem>
 					<ListItem button key={"TASK"} onClick={onCLickTask}>
 						<ListItemIcon>
