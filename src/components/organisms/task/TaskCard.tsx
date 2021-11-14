@@ -71,12 +71,16 @@ export const  TaskCard: FC<Props> = (props) => {
 				/>
 			</DialogContentText>
 		</DialogContent>
-		<DialogActions>
+		<DialogActions style={{textAlign: "center"}}>
 			<Button
 				onClick={() => setOpenFlg(false)}
 				color="primary"
 			>
-				OK
+			OK
+			</Button>
+			<Button
+			>
+			delete
 			</Button>
 		</DialogActions>
  	</Dialog>
