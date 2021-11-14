@@ -17,7 +17,7 @@ export const Home: React.FC = () => {
 	const [remarksValue, setRemarksValue] = useState<string>("");
 
 	const onClickButton = () => {
-		db.collection('tasks').add({
+		db.collection('tasks').doc(`${taskValue}`).set({
 			taskValue: taskValue,
 			radioValue: radioValue,
 			dateStartValue: dateStartValue,
