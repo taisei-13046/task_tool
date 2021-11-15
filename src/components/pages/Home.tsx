@@ -31,6 +31,23 @@ export const Home: React.FC = () => {
 			setDateEndValue(null)
 			setRemarksValue("")
 		})
+	} */
+
+	const onClickButton = () => {
+		db.collection('tasks').doc(`${taskValue}`).set({
+			taskValue: taskValue,
+			radioValue: radioValue,
+			dateStartValue: dateStartValue,
+			dateEndValue: dateEndValue,
+			remarksValue: remarksValue
+		})
+		.then(() => {
+			setTaskValue("")
+			setRadioValue("")
+			setDateStartValue(null)
+			setDateEndValue(null)
+			setRemarksValue("")
+		})
 	}
 
 	return (

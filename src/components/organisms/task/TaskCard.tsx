@@ -3,6 +3,8 @@ import { TaskInfo } from '../../module/TaskInfo';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { DataType } from '../../../types/firebase/user';
 import {usetableBodyStyle } from '../../styles/tableStyle';
+import { db } from '../../../firebase';
+import { AlertMessage } from '../../atoms/AlertMessage';
 
 type Props = {
 	users: DataType[],
@@ -12,6 +14,7 @@ export const  TaskCard: FC<Props> = (props) => {
 	const {users} = props;
 	const classes = usetableBodyStyle();
 	const [flg, setOpenFlg] = useState<boolean>(false);
+	const [isopen, setOpenis] = useState<boolean>(false);
 	const [info, setInfo] = useState<DataType | null>(null);
 	const onRowClick = (user: DataType) => {
 		setOpenFlg(true);
@@ -71,15 +74,22 @@ export const  TaskCard: FC<Props> = (props) => {
 				/>
 			</DialogContentText>
 		</DialogContent>
-		<DialogActions>
+		<DialogActions style={{textAlign: "center"}}>
 			<Button
 				onClick={() => setOpenFlg(false)}
 				color="primary"
 			>
-				OK
+			OK
+			</Button>
+			<Button
+				onClick={() => setOpenis(true)}
+			>
+			delete
 			</Button>
 		</DialogActions>
  	</Dialog>
+	<AlertMessage info={info} isopen={isopen} setOpenis={setOpenis} setOpenFlg={setOpenFlg}/>
+	
 	</>
 			
     );
